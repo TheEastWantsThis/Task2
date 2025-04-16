@@ -1,5 +1,7 @@
 package servesTask
 
+import "github.com/google/uuid"
+
 type TaskServes interface {
 	CreateTask(task TaskNew) (TaskNew, error)
 	GetAllTasks() ([]TaskNew, error)
@@ -17,7 +19,9 @@ func NewServesTask(r TaskRepository) TaskServes {
 }
 
 func (s *servesTask) CreateTask(task TaskNew) (TaskNew, error) {
+	id := uuid.New().String()
 	t := TaskNew{
+		ID:     id,
 		Task:   task.Task,
 		IsDone: task.IsDone,
 	}
